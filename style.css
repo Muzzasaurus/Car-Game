@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html {
+    height: 100%;
+}
+html, body {
+    overflow: hidden;
+}
+body {
+    min-height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas {
+    image-rendering: pixelated;
+    height: 100vh;
+}
