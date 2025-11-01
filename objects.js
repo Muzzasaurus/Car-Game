@@ -82,8 +82,8 @@ class Player extends BaseObj {
         this.turnDirection = 0;
         this.turnDiv = 1.05;
         this.displaySpeedMult = 2.5;
-        this.friction = 0.01;
-        this.divFriction = 1.02;
+        this.friction = 0.001;
+        this.divFriction = 1.001;
         this.trueDirection = 0;
         this.actions = [];
         this.visible = true;
@@ -134,7 +134,7 @@ class Player extends BaseObj {
         this.init_hitbox = [[this.x-this.width/2, this.y-this.height/1.5],[this.x-this.width/2, this.y+this.height/3],[this.x+this.width/2, this.y+this.height/3],[this.x+this.width/2, this.y-this.height/1.5]];
     }
     forwards() {
-        this.speed += this.accelerate;
+        this.speed += this.accelerate/Math.max(1,(this.speed/5));
     }
     backwards() {
         this.speed = Math.max(0,this.speed - this.brake);
@@ -153,6 +153,26 @@ class Player extends BaseObj {
             ctx.fillStyle = this.colour;
             ctx.fillRect(this.x-this.width/2, this.y-this.height/1.5, this.width, this.height);
         }
+    }
+}
+
+class BikePlayer extends Player {
+    constructor() {
+        super()
+        this.width = 7;
+        this.height = 30;
+        this.colour = "#ff82ba";
+        this.accelerate = 0.05;
+        this.brake = 0.1;
+        this.turnSpeed = 1;
+        this.turnDirection = 0;
+        this.turnDiv = 1.05;
+        this.displaySpeedMult = 2.5;
+        this.friction = 0.001;
+        this.divFriction = 1.005;
+        this.trueDirection = 0;
+        this.actions = [];
+        this.visible = true;
     }
 }
 
@@ -185,14 +205,14 @@ class Replayer extends Player {
                         this.pressedKeys[3] = 1;
                         break;
                     case 5:
-                        this.time = 0;
-                        this.speed = 0;
+                        this.readPos = 0;
                         this.x = this.startX;
                         this.y = this.startY;
                         this.direction = this.startDir;
+                        this.time = 0;
+                        this.speed = 0;
                         this.turnDirection = 0;
-                        this.readPos = 0;
-                        break;
+                        return;
                 }
                 this.readPos += 1;
                 if (this.actions.length <= this.readPos) return;

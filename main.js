@@ -41,8 +41,13 @@ var tileScale = 8;
 var loadedLevel = -1;
 
 function restartLevel() {
-    player = instance_create(Player, SPAWNLOCATIONS[loop][0], SPAWNLOCATIONS[loop][1]);
-    player.direction = SPAWNLOCATIONS[loop][2];
+    if (loop == SPAWNLOCATIONS.length-1) {
+        player = instance_create(BikePlayer, SPAWNLOCATIONS[loop][0], SPAWNLOCATIONS[loop][1]);
+        player.direction = SPAWNLOCATIONS[loop][2];
+    } else {
+        player = instance_create(Player, SPAWNLOCATIONS[loop][0], SPAWNLOCATIONS[loop][1]);
+        player.direction = SPAWNLOCATIONS[loop][2];
+    }
     goal = instance_create(Goal, GOALLOCATIONS[loop][0], GOALLOCATIONS[loop][1]);
     time = 0;
     for (let i = replayers.length-1; i >= 0; i--) {
@@ -144,7 +149,7 @@ function Main() {
             replayers[i].turnDirection = 0;
         }*/
         //Create clone
-        loop++
+        loop++;
         let obj = instance_create(Replayer, SPAWNLOCATIONS[loop-1][0], SPAWNLOCATIONS[loop-1][1]);
         obj.direction = SPAWNLOCATIONS[loop-1][2];
         obj.startDir = obj.direction;
