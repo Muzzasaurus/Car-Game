@@ -182,6 +182,7 @@ class Replayer extends Player {
         this.time = 0;
         this.readPos = 0;
         this.pressedKeys = [0,0,0,0];
+        this.colour = "#ff4639";
     }
     earlyStep() {
         this.pressedKeys = [0,0,0,0];
@@ -242,7 +243,7 @@ class Replayer extends Player {
     endStep() {
         super.endStep();
         this.time += 1;
-        this.colour = hslToHex(333+this.time, 100, 75);
+        //this.colour = hslToHex(333+this.time, 100, 75);
     }
     draw() {
         this.image_angle = this.direction-90;

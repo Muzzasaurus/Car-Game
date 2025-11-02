@@ -16,6 +16,18 @@ function point_direction(x1, y1, x2, y2) {
 function point_distance(x1, y1, x2, y2) {
 	return Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2));
 }
+function curInside(x1, y1, x2, y2) {
+    if (mouseX > x1) {
+        if (mouseY > y1) {
+            if (mouseX < x2) {
+                if (mouseY < y2) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 //function adapted from https://stackoverflow.com/a/10965077
 function place_meeting(poly1, poly2) {
     var polygons = [poly1, poly2];
